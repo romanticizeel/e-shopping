@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "@/styles/Home.module.css";
+import { useSession } from "next-auth/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,6 +16,8 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+  const { data } = useSession();
+  console.log(data);
   return (
     <>
       <Head>
