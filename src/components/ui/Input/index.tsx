@@ -1,4 +1,4 @@
-import styles from "./Input.module.scss";
+import styles from "./Inputs.module.scss";
 
 type PropsTypes = {
   label?: string;
