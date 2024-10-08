@@ -1,107 +1,95 @@
 import Link from "next/link";
-import styles from "./register.module.scss";
+import styles from "./Register.module.scss";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { signIn } from "next-auth/react";
 
 const RegisterView = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(''); 
-    const push = useRouter();
-    
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setIsLoading(true);
-        setError('');
-        const form = event.target as HTMLFormElement;
-        const data = {
-            fullName: form.fullName.value,
-            email: form.email.value,
-            phone: form.phone.value,
-            password: form.password.value,
-        }
+  const { push, query } = useRouter();
 
-        const result = await fetch("/api/user/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
+  const callbackUrl: any = query.callbackUrl || "/";
 
-        if (result.status === 200) {
-            form.reset();
-            setIsLoading(false);
-            push.push('/auth/login');
-        } else {
-            setIsLoading(false);
-            setError("Email already registered");
-        }
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsLoading(true);
+    setError("");
+    const form = event.target as HTMLFormElement;
+    const data = {
+      fullName: form.fullName.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      password: form.password.value,
+    };
+
+    const result = await fetch("/api/user/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (result.status === 200) {
+      form.reset();
+      setIsLoading(false);
+      push("/auth/login");
+    } else {
+      setIsLoading(false);
+      setError("Email already registered");
     }
+  };
 
   return (
     <div className={styles.register}>
-      <h1 className={styles.register__title}>Register</h1>
-      {error && <p className={styles.register__error}>{error}</p>}
       <div className={styles.register__form}>
+        <h1 className={styles.register__form__title}>Register</h1>
+        {error && <p className={styles.register__form__error}>{error}</p>}
         <form onSubmit={handleSubmit}>
           {/* input full name */}
-          <div className={styles.register__form__item}>
-            <label htmlFor="fullName">Full Name</label>
-            <input
-              type="text"
-              name="fullName"
-              id="fullName"
-              className={styles.register__form__item__input}
-              required
-            />
-          </div>
+          <Input label="Full Name" name="fullName" type="text" />
 
           {/* input email */}
-          <div className={styles.register__form__item}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className={styles.register__form__item__input}
-              required
-            />
-          </div>
+          <Input label="Email" name="email" type="email" />
 
           {/* input phone number */}
-          <div className={styles.register__form__item}>
-            <label htmlFor="phone">Phone Number</label>
-            <input
-              type="number"
-              name="phone"
-              id="phone"
-              className={styles.register__form__item__input}
-              required
-            />
-          </div>
+          <Input label="Phone Number" name="phone" type="number" />
 
           {/* input password */}
-          <div className={styles.register__form__item}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              className={styles.register__form__item__input}
-              required
-            />
-          </div>
+          <Input label="Password" name="password" type="password" />
 
           {/* button register */}
-          <button type="submit" className={styles.register__form__item__button}>
+          <Button
+            type="submit"
+            variant="primary"
+            className={styles.register__form__button}
+          >
             {isLoading ? "Loading..." : "Register"}
-          </button>
+          </Button>
         </form>
+
+        <hr className={styles.register__form__divider} />
+
+        {/* button login with google */}
+        <div className={styles.register__form__other}>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => signIn("google", { callbackUrl, redirect: false })}
+            className={styles.register__form__other__button}
+          >
+            <i className="bx bxl-google" /> Login with Google
+          </Button>
+        </div>
+
+        <p className={styles.register__text}>
+          Have an account? <Link href="/auth/login">Sign in here</Link>
+        </p>
       </div>
-      <p className={styles.register__text}>
-        Have an account? <Link href="/auth/login">Sign in here</Link>
-      </p>
     </div>
   );
 };
