@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./Login.module.scss";
+import styles from "./Logins.module.scss";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useRouter } from "next/router";
