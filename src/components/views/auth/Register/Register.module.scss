@@ -11,12 +11,19 @@
   }
   &__other {
     &__button {
+      background-color: #ffffff;
+      color: #000000;
+      outline: 1px solid #000000;
       width: 100%;
       border-radius: 10px;
-      padding: 12px;
       gap: 5px;
       i {
         font-size: 20px;
+      }
+      &:hover {
+        background-color: #000000;
+        color: #ffffff;
+        transition: all 0.3s ease;
       }
     }
   }

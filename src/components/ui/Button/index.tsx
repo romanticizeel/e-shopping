@@ -4,12 +4,12 @@ type PropsTypes = {
   type: "button" | "submit" | "reset" | undefined;
   onClick?: () => void;
   children: React.ReactNode;
-  variant: "primary" | "secondary" | "danger";
+  variant: "primary" | "secondary" | "danger" ;
   className?: string;
 };
 
 const Button = (props: PropsTypes) => {
-  const { type, onClick, children, variant = "primary", className } = props;
+  const { type, onClick, children, variant = "secondary", className } = props;
   return (
     <button
       type={type}
