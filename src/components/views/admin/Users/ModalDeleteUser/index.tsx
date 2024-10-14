@@ -2,9 +2,11 @@ import Button from "@/components/ui/Button";
 import userServices from "@/services/user";
 import styles from "./ModalDeleteUser.module.scss";
 import ModalConfirm from "@/components/ui/ModalConfirm";
+import { useSession } from "next-auth/react";
 
 const ModalDeleteUser = (props: any) => {
   const { deletedUser, setDeletedUser, setUsersData } = props;
+  const session: any = useSession();
 
   return (
     <ModalConfirm onClose={() => setDeletedUser({})}>
@@ -16,7 +18,7 @@ const ModalDeleteUser = (props: any) => {
             variant="outline-secondary"
             className={styles.modal__container__button}
             onClick={() => {
-              userServices.deleteUser(deletedUser.id).then(() => {
+              userServices.deleteUser(deletedUser.id, session.data?.accessToken).then(() => {
                 setDeletedUser({});
                 userServices.getAllUsers().then((response) => {
                   setUsersData(response.data.data);
