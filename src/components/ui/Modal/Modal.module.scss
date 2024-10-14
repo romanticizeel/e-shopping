@@ -1,0 +1,19 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__main {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50vw;
+    max-height: 80vh;
+  }
+}

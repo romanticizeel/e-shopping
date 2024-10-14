@@ -7,12 +7,15 @@ import {
   collection,
   where,
   addDoc,
+  updateDoc,
+  deleteDoc
 } from "firebase/firestore";
 import { app } from "./init";
+// import { updateDoc } from "firebase/firestore/lite";
 
 const firestore = getFirestore(app);
 
-export async function retriveData(collectionName: string) {
+export async function retrieveData(collectionName: string) {
   const snapshot = await getDocs(collection(firestore, collectionName));
   const data = snapshot.docs.map((doc) => ({
     id: doc.id,
@@ -58,5 +61,36 @@ export async function addData(
     .catch((error) => {
       callback(false);
       console.log(error);
+    });
+}
+
+export async function updateData(
+  collectionName: string,
+  id: string,
+  data: any,
+  callback: (result: any) => void
+) {
+  const docRef = doc(firestore, collectionName, id);
+  await updateDoc(docRef, data)
+    .then(() => {
+      callback(true);
+    })
+    .catch(() => {
+      callback(false);
+    });
+}
+
+export async function deleteData(
+  collectionName: string,
+  id: string,
+  callback: (result: any) => void
+) {
+  const docRef = doc(firestore, collectionName, id);
+  await deleteDoc(docRef)
+    .then(() => {
+      callback(true);
+    })
+    .catch(() => {
+      callback(false);
     });
 }

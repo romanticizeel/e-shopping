@@ -13,6 +13,17 @@
   color: #fff;
 }
 
+.outline-secondary {
+  background-color: transparent;
+  border: 1px solid #000;
+  color: #000;
+  cursor: pointer;
+  &:hover {
+    background-color: #000;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+}
 
 .danger {
   background-color: #ff0000;

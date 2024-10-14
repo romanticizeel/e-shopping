@@ -19,7 +19,7 @@ const Sidebar = (props: PropsTypes) => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebar__top}>
-        <h1 className={styles.sidebar__top__title}>Admin Panel</h1>
+        <h1 className={styles.sidebar__top__title}>E-shopping</h1>
         <div className={styles.sidebar__top__lists}>
           {listSidebarItem.map((item) => {
             return (

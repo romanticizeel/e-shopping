@@ -4,7 +4,7 @@ type PropsTypes = {
   type: "button" | "submit" | "reset" | undefined;
   onClick?: () => void;
   children: React.ReactNode;
-  variant: "primary" | "secondary" | "danger" ;
+  variant?: "primary" | "secondary" | "danger" | "outline-secondary";
   className?: string;
 };
 

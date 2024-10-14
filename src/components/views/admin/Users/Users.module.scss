@@ -1,0 +1,41 @@
+.users {
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+  &__tableWrapper {
+    overflow-x: auto;
+  }
+  &__table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+
+    thead {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    &__action {
+      display: flex;
+      &__button {
+        margin-right: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
   background-color: #000;
   color: #fff;
   padding: 20px;
-  width: 250px;
+  width: 300px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -50,6 +50,7 @@
       background-color: #ffffff1c;
       color: #ffffff;
       border-radius: 10px;
+      gap: 5px;
       &:hover {
         background-color: #ffffffda;
         color: #000000;
